@@ -1,7 +1,7 @@
 # Fake PLM MCP
 A local MCP Server for a fake PLM Service as a learning exercise and experiment
 
-## Typical use-case from Claude Desktop:
+## Typical conversation from Claude Desktop
 
 > Use my Fake PLM tools. I'd like to identify the maturity state discrepancies between the complete EBOM and related MBOM of product Root. Summarize in a nice table.
 
