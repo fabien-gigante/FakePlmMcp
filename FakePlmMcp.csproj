@@ -12,4 +12,10 @@
     <PackageReference Include="ModelContextProtocol" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="PlmDataset.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

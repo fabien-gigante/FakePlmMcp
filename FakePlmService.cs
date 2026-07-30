@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
-public class Item(string type, string name, string revision = "A")
-{
+public class Item(string type, string name, string revision) {
   public Guid Id { get; init; } = Guid.NewGuid();
   public string Type { get; init; } = type;
   public string Name { get; init; } = name;
@@ -9,9 +9,16 @@ public class Item(string type, string name, string revision = "A")
   public string Maturity { get; set; } = "In Work";
   [JsonIgnore]
   public List<Relation> Relations { get; init; } = [];
+  public static Item Load(Dictionary<Guid, Item> database, JsonElement element) {
+    Guid id = Guid.Parse(element.GetProperty("id").GetString()!);
+    string type = element.GetProperty("type").GetString()!;
+    string name = element.GetProperty("name").GetString()!;
+    string revision = element.TryGetProperty("revision", out var rev) ? rev.GetString()! : "A";
+    string maturity = element.TryGetProperty("maturity", out var mat) ? mat.GetString()! : "In Work";
+    return database[id] = new Item(type, name, revision) { Id = id, Maturity = maturity };
+  }
 }
-public class Relation
-{
+public class Relation {
   public string FromPredicate { get; init; }
   public string ToPredicate { get; init; }
   [JsonIgnore]
@@ -20,31 +27,31 @@ public class Relation
   public Item ToItem { get; init; }
   public Guid FromId => FromItem.Id;
   public Guid ToId => ToItem.Id;
-  public Relation(string fromPredicate, Item fromItem, string toPredicate, Item toItem)
-  {
+  public Relation(string fromPredicate, Item fromItem, string toPredicate, Item toItem) {
     FromPredicate = fromPredicate; FromItem = fromItem; ToPredicate = toPredicate; ToItem = toItem;
     FromItem.Relations.Add(this); ToItem.Relations.Add(this);
   }
+  public static Relation Load(Dictionary<Guid, Item> database, JsonElement element) {
+    Guid fromId = Guid.Parse(element.GetProperty("fromId").GetString()!);
+    Guid toId = Guid.Parse(element.GetProperty("toId").GetString()!);
+    Item fromItem = database.GetValueOrDefault(fromId) ?? throw new InvalidDataException($"Unknown item id '{fromId}'.");
+    Item toItem = database.GetValueOrDefault(toId) ?? throw new InvalidDataException($"Unknown item id '{toId}'.");
+    string fromPredicate = element.GetProperty("fromPredicate").GetString()!;
+    string toPredicate = element.GetProperty("toPredicate").GetString()!;
+    return new Relation(fromPredicate, fromItem, toPredicate, toItem);
+  }
 }
 
-public class FakePlmService
-{
+public class FakePlmService {
+  private static readonly string _datasetFilename = "PlmDataset.json";
   private readonly Dictionary<Guid, Item> _database = [];
-  public FakePlmService()
-  {
-    Item a = new("Eng Item", "Prd Root");
-    Item b = new("Eng Item", "Prd 1") { Maturity = "Frozen" };
-    Item c = new("Eng Item", "Prd 2", "B") { Maturity = "Obsolete" };
-    Item d = new("Manuf Item", "Mfg Prd Root");
-    Item e = new("Manuf Item", "Mfg Prd 1" ,"B") { Maturity = "Draft" };
-    Item f = new("Manuf Item", "Mfg Prd 2");
-    new Relation("Parent", a, "Child", b); new Relation("Parent", a, "Child", c);
-    new Relation("Parent", d, "Child", e); new Relation("Parent", d, "Child", f);
-    new Relation("Scoping", d, "Scoped", a); new Relation("Scoping", e, "Scoped", b); new Relation("Scoping", f, "Scoped", c);
-    Save(a, b, c, d, e, f);
+  public FakePlmService() {
+    using var dataset = JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, _datasetFilename)));
+    foreach (var element in dataset.RootElement.GetProperty("items").EnumerateArray())
+      Item.Load(_database, element);
+    foreach (var element in dataset.RootElement.GetProperty("relations").EnumerateArray())
+      Relation.Load(_database, element);
   }
-  private void Save(params Item[] items) => Array.ForEach(items, item => _database.Add(item.Id, item));
-
   public IEnumerable<Item> Search(string? type, string? name, string? revision)
     => _database.Values
       .Where(item => type is null || item.Type == type)
@@ -56,8 +63,7 @@ public class FakePlmService
       .Where(rel => bidirectional || rel.FromItem == item)
       .Where(rel => fromPredicate?.Contains(rel.FromPredicate) ?? true)
       .Where(rel => toPredicate?.Contains(rel.ToPredicate) ?? true);
-  public IEnumerable<Relation> GetRelations(IEnumerable<Item> items, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false, bool recursively = false)
-  {
+  public IEnumerable<Relation> GetRelations(IEnumerable<Item> items, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false, bool recursively = false) {
     HashSet<Item> visitedItems = [.. items];
     HashSet<Relation> visitedRelations = [];
     Queue<Item> queue = new(visitedItems);

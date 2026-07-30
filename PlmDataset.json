@@ -1,0 +1,19 @@
+{
+  "items": [
+    { "id": "8daec54a-6a60-4ea7-9d84-474534ac3aab", "type": "Eng Item", "name": "Prd Root" },
+    { "id": "c5ab324a-f586-4c80-9e23-d045d569bd6a", "type": "Eng Item", "name": "Prd 1", "maturity": "Frozen" },
+    { "id": "94dba538-dd31-448a-9547-9647d81dcf4e", "type": "Eng Item", "name": "Prd 2", "revision": "B", "maturity": "Obsolete" },
+    { "id": "b05ca9eb-0d8d-478f-95c4-ea565aa261e1", "type": "Manuf Item", "name": "Mfg Prd Root" },
+    { "id": "86d8a7a8-94b3-4970-90e0-269f81df926a", "type": "Manuf Item", "name": "Mfg Prd 1", "revision": "B", "maturity": "Draft" },
+    { "id": "2c3e2f64-6b1d-4a35-a4f5-ef8d751ea48f", "type": "Manuf Item", "name": "Mfg Prd 2" }
+  ],
+  "relations": [
+    { "fromId": "8daec54a-6a60-4ea7-9d84-474534ac3aab", "fromPredicate": "Parent", "toId": "c5ab324a-f586-4c80-9e23-d045d569bd6a", "toPredicate": "Child" },
+    { "fromId": "8daec54a-6a60-4ea7-9d84-474534ac3aab", "fromPredicate": "Parent", "toId": "94dba538-dd31-448a-9547-9647d81dcf4e", "toPredicate": "Child" },
+    { "fromId": "b05ca9eb-0d8d-478f-95c4-ea565aa261e1", "fromPredicate": "Parent", "toId": "86d8a7a8-94b3-4970-90e0-269f81df926a", "toPredicate": "Child" },
+    { "fromId": "b05ca9eb-0d8d-478f-95c4-ea565aa261e1", "fromPredicate": "Parent", "toId": "2c3e2f64-6b1d-4a35-a4f5-ef8d751ea48f", "toPredicate": "Child" },
+    { "fromId": "b05ca9eb-0d8d-478f-95c4-ea565aa261e1", "fromPredicate": "Scoping", "toId": "8daec54a-6a60-4ea7-9d84-474534ac3aab", "toPredicate": "Scoped" },
+    { "fromId": "86d8a7a8-94b3-4970-90e0-269f81df926a", "fromPredicate": "Scoping", "toId": "c5ab324a-f586-4c80-9e23-d045d569bd6a", "toPredicate": "Scoped" },
+    { "fromId": "2c3e2f64-6b1d-4a35-a4f5-ef8d751ea48f", "fromPredicate": "Scoping", "toId": "94dba538-dd31-448a-9547-9647d81dcf4e", "toPredicate": "Scoped" }
+  ]
+}
