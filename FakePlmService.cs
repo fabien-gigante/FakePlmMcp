@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class Item(string type, string name, string revision) {
+public class Item(string type, string name, string revision = "A") {
   public Guid Id { get; init; } = Guid.NewGuid();
   public string Type { get; init; } = type;
   public string Name { get; init; } = name;
@@ -33,12 +33,10 @@ public class Relation {
   }
 
   public static Relation Load(Dictionary<Guid, Item> database, JsonElement element) {
-    Guid fromId =element.GetProperty("fromId").GetGuid();
-    Guid toId = element.GetProperty("toId").GetGuid();
+    Guid fromId = element.GetProperty("fromId").GetGuid(), toId = element.GetProperty("toId").GetGuid();
     Item fromItem = database.GetValueOrDefault(fromId) ?? throw new InvalidDataException($"Unknown item id '{fromId}'.");
     Item toItem = database.GetValueOrDefault(toId) ?? throw new InvalidDataException($"Unknown item id '{toId}'.");
-    string fromPredicate = element.GetProperty("fromPredicate").GetString()!;
-    string toPredicate = element.GetProperty("toPredicate").GetString()!;
+    string fromPredicate = element.GetProperty("fromPredicate").GetString()!, toPredicate = element.GetProperty("toPredicate").GetString()!;
     return new Relation(fromPredicate, fromItem, toPredicate, toItem);
   }
 }
@@ -48,10 +46,8 @@ public class FakePlmService {
   private readonly Dictionary<Guid, Item> _database = [];
   public FakePlmService() {
     using var dataset = JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, _datasetFilename)));
-    foreach (var element in dataset.RootElement.GetProperty("items").EnumerateArray())
-      Item.Load(_database, element);
-    foreach (var element in dataset.RootElement.GetProperty("relations").EnumerateArray())
-      Relation.Load(_database, element);
+    foreach (var element in dataset.RootElement.GetProperty("items").EnumerateArray()) Item.Load(_database, element);
+    foreach (var element in dataset.RootElement.GetProperty("relations").EnumerateArray()) Relation.Load(_database, element);
   }
   public IEnumerable<Item> Search(string? type, string? name, string? revision)
     => _database.Values

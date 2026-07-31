@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
@@ -10,7 +9,6 @@ builder.Logging.AddConsole(o => o.LogToStandardErrorThreshold = LogLevel.Trace);
 builder.Services.AddSingleton<FakePlmService>();
 builder.Services.AddSingleton<FakePlmTools>();
 builder.Services.AddMcpServer().WithStdioServerTransport().WithToolsFromAssembly();
-
 await builder.Build().RunAsync();
 
 [McpServerToolType]
