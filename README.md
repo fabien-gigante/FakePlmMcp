@@ -1,46 +1,70 @@
 # Fake PLM MCP
 A local MCP Server for a fake PLM Service as a learning exercise and experiment
 
-## Typical conversation from Claude Desktop
+## Typical conversation with Claude Desktop
 
-> Use my Fake PLM tools. I'd like to identify the maturity state discrepancies between the complete EBOM and related MBOM of product Root. Summarize in a nice table.
+> Use my Fake PLM tools. I'd like to identify the maturity state discrepancies between the complete EBOM and related MBOM of product Root. Summarize in a nice table ordered by severity.
 
-I pulled the full EBOM and MBOM structures for Root and matched each engineering item to its scoped manufacturing counterpart. Here's the comparison:
+I pulled the full EBOM/MBOM structure for Root (2 levels, 2 children each side, linked via Scoping relations) and compared maturity states. Here's what I found:
 
-| Level | EBOM Item (Eng) | EBOM Rev | EBOM Maturity | MBOM Item (Manuf) | MBOM Rev | MBOM Maturity | Discrepancy? |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Root | Prd Root | A | In Work | Mfg Prd Root | A | In Work | ✅ Aligned |
-| Child 1 | Prd 1 | A | Frozen | Mfg Prd 1 | B | Draft | ⚠️ Yes --- MBOM lags behind (Frozen vs Draft) |
-| Child 2 | Prd 2 | B | Obsolete | Mfg Prd 2 | A | In Work | ⚠️ Yes --- MBOM still active while EBOM is obsolete |
+| Severity | EBOM Item | EBOM Maturity | MBOM Item | MBOM Maturity | Discrepancy |
+| --- | --- | --- | --- | --- | --- |
+| 🔴 Critical | Prd 2 (Rev B) | Obsolete | Mfg Prd 2 (Rev A) | In Work | The engineering part has been retired, but its manufacturing counterpart is still actively being worked --- risk of building to a dead design. |
+| 🟠 High | Prd 1 (Rev A) | Frozen | Mfg Prd 1 (Rev B) | Draft | Engineering design is locked down, but manufacturing definition hasn't progressed past Draft --- MBOM prep is lagging well behind EBOM. |
+| 🟢 None | Prd Root (Rev A) | In Work | Mfg Prd Root (Rev A) | In Work | States are aligned --- no action needed. |
 
-Summary of findings:
+Summary:
 
--   Root itself is consistent --- both structures are at "In Work," so no action needed there.
--   Prd 1 / Mfg Prd 1: The engineering definition has already been Frozen, but the manufacturing counterpart is still in Draft. This means manufacturing engineering hasn't caught up to the finalized design --- worth flagging to the manufacturing team to begin maturing their item.
--   Prd 2 / Mfg Prd 2: This is the more serious one --- the EBOM item is Obsolete, but the MBOM item is still In Work, meaning production/manufacturing planning may be actively developing around a part that's been retired on the engineering side. This should be investigated to confirm whether Mfg Prd 2 needs to be obsoleted or re-scoped to a newer EBOM revision.
+-   Prd 2 is the most urgent issue: it's flagged Obsolete on the engineering side while manufacturing treats it as still in active development. This should be reviewed immediately to avoid building an obsolete component.
+-   Prd 1 shows a significant maturity gap --- the design is Frozen but manufacturing hasn't advanced past Draft, suggesting the MBOM update process hasn't kept pace.
+-   The Root assembly itself is consistent across both BOMs.
 
-Let me know if you'd like me to dig into *why* these are out of sync (e.g., checking revision history) or export this as a document.
+> Explain the plan you followed and details the tools you used at each step.
 
-> Explain the plan you followed and the tools you used.
+Deliberated on balancing transparency while safeguarding technical implementation details
 
-Here's the approach I took, step by step:
+Deliberated on balancing transparency while safeguarding technical implementation details
 
-1\. Found the root items\
-I searched the PLM database (`FakePlmMcp:search`) for items named "Root" with no filter on type or revision, which returned two items --- one turned out to be an Eng Item (the EBOM root) and one a Manuf Item (the MBOM root).
+Here's the step-by-step approach I took using the Fake PLM MCP tools:
 
-2\. Identified what they were\
-I used `FakePlmMcp:fetch` to pull their details (type, name, revision, maturity), confirming one was "Prd Root" (engineering) and the other "Mfg Prd Root" (manufacturing).
+1\. Locate the product "Root"
 
-3\. Walked the EBOM tree\
-I called `FakePlmMcp:get_relations` on the engineering root with `recursively: true`, using the default Parent→Child predicates. This returned the full exhaustive set of parent-child links in one call --- no need to manually walk level by level. I then `fetch`ed the resulting child item IDs to get their names, revisions, and maturity states.
+-   Tool: `FakePlmMcp:search` with `name="Root"`, `revision=null`, `type=null`
+-   This returned two items: an Engineering-side item and a Manufacturing-side item, since "Root" exists as both an EBOM root and an MBOM root.
 
-4\. Walked the MBOM tree\
-Same process, but starting from the manufacturing root --- recursive `get_relations`, then `fetch` on the children.
+2\. Identify what those items actually are
 
-5\. Confirmed the EBOM↔MBOM mapping\
-Rather than just assuming "Prd 1" corresponds to "Mfg Prd 1" by name similarity, I ran one more `get_relations` call across all the items with predicates unfiltered (`null`) and `bidirectional: true`. This surfaced a "Scoping" / "Scoped" relation type linking each manufacturing item directly to its corresponding engineering item --- that gave me a verified, explicit link rather than an inferred one.
+-   Tool: `FakePlmMcp:fetch` on both returned ids
+-   This showed one was an Eng Item ("Prd Root", maturity: In Work) --- the EBOM root --- and the other a Manuf Item ("Mfg Prd Root", maturity: In Work) --- the MBOM root.
 
-6\. Compared maturity states\
-With confirmed pairs in hand, I compared the `maturity` field on each matched EBOM/MBOM item and flagged where they differed, then organized it into the summary table.
+3\. Discover the relation schema (exploratory pass)
 
-One design note: the tool schemas explicitly instruct that item IDs (UUIDs) should stay internal and never be shown to you --- so throughout, I only surfaced names, revisions, and maturity values, never the raw IDs.
+-   Tool: `FakePlmMcp:get_relations` on the EBOM root, with `bidirectional=true` and both predicates left `null` (allowed only for this first discovery call)
+-   This revealed two predicate types in play:
+    -   `Parent → Child`: the BOM structure (assembly to sub-item)
+    -   `Scoping → Scoped`: the link connecting a Manuf Item to its corresponding Eng Item
+
+4\. Traverse the full EBOM tree
+
+-   Tool: `FakePlmMcp:get_relations` with `fromPredicate=["Parent"]`, `toPredicate=["Child"]`, `recursively=true`, on the EBOM root
+-   Returned two children with no further descendants --- confirming a flat, 2-item EBOM structure (both leaves).
+
+5\. Traverse the full MBOM tree
+
+-   Same call, recursive, but rooted at the Manuf Item instead --- again returned two children, confirming a flat, 2-item MBOM structure.
+
+6\. Fetch details for all four child items
+
+-   Tool: `FakePlmMcp:fetch` on all four child ids at once
+-   Got their names, types, revisions, and maturity states in one batch call.
+
+7\. Map each Manuf child to its corresponding Eng child
+
+-   Tool: `FakePlmMcp:get_relations` with `fromPredicate=["Scoping"]`, `toPredicate=["Scoped"]` on the two Manuf children
+-   This gave the explicit EBOM↔MBOM pairing needed to compare maturity states correctly (rather than guessing pairings from names, which the tool description explicitly warns against).
+
+8\. Compare and rank
+
+-   With root-to-root and child-to-child pairs established, I compared maturity states for each pair, assessed how far apart they were in a typical maturity lifecycle (Draft → In Work → Frozen → Released → Obsolete), and ranked the mismatches by risk --- treating "MBOM still active while EBOM is Obsolete" as more severe than "MBOM lagging a Frozen EBOM."
+
+Throughout, I kept item IDs internal (never displayed them) and relied on the `Scoping`/`Scoped` relations --- not name-matching --- to pair EBOM and MBOM items, since the tool explicitly cautions against inferring connectivity from names/attributes alone.

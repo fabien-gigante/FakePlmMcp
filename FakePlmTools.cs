@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
@@ -41,13 +42,13 @@ public class FakePlmTools
   public IEnumerable<Relation> GetRelations(
     [Description("The exact Item Ids. (Ids should be kept internal and not shown to the user.)")]
     Guid[] ids,
-    [Description("An optional criteria for Relation predicates to consider FROM the related Items. Unfiltered if 'null' is given.")]
+    [Description("Criteria for Relation predicates to consider FROM the related Items. Strongly recommended over leaving 'null'. Leave 'null' only on your first discovery call for a given set of items/domains. Once a call has revealed the predicate names relevant to your task, all subsequent calls for that same purpose must pass those predicates explicitly rather than re-running unfiltered.")]
     [DefaultValue(new[] { "Parent" })]
     string[]? fromPredicate = null,
-    [Description("An optional criteria for Relation predicates to consider TO the related Items. Unfiltered if 'null' is given.")]
+    [Description("Criteria for Relation predicates to consider TO the related Items. Strongly recommended over leaving 'null'. Leave 'null' only on your first discovery call for a given set of items/domains. Once a call has revealed the predicate names relevant to your task, all subsequent calls for that same purpose must pass those predicates explicitly rather than re-running unfiltered.")]
     [DefaultValue(new[] { "Child" })]
     string[]? toPredicate = null,
-    [Description("If bidirectional is 'true' both Relations from and to the Item (in either direction) are returned. If bidirectional is 'false', only the from → to relations are returned.")]
+    [Description("If bidirectional is 'true' both Relations from and to the Item (in either direction) are returned. If bidirectional is 'false', only the from → to relations are returned. If used for discovery, on an item whose role in the schema is yet unknown, use 'true' to include incoming relations.")]
     bool bidirectional = false,
     [Description("When recursively is 'true', the returned relation set is exhaustive for the given predicates — every descendant reachable via those predicates is included. When recursively is 'true', callers should treat items with no outgoing relations in the result as confirmed leaf nodes, not as unexplored.")]
     bool recursively = false

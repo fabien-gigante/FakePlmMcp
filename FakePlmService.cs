@@ -11,8 +11,6 @@ public class Item(string type, string name, string revision) {
   public List<Relation> OutRelations { get; init; } = [];
   [JsonIgnore]
   public List<Relation> InRelations { get; init; } = [];
-  [JsonIgnore]
-  public IEnumerable<Relation> Relations => OutRelations.Concat(InRelations);
 
   private static readonly JsonSerializerOptions _serializerOptions = new() { PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
   public static Item Load(Dictionary<Guid, Item> database, JsonElement element) {
@@ -62,7 +60,7 @@ public class FakePlmService {
       .Where(item => revision is null || item.Revision == revision);
   public Item? Fetch(Guid id) => _database.GetValueOrDefault(id);
   public IEnumerable<Relation> GetRelations(Item item, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false)
-    => (bidirectional ? item.Relations : item.OutRelations)
+    => (bidirectional ? item.OutRelations.Concat(item.InRelations) : item.OutRelations)
       .Where(rel => fromPredicate?.Contains(rel.FromPredicate) ?? true)
       .Where(rel => toPredicate?.Contains(rel.ToPredicate) ?? true);
   public IEnumerable<Relation> GetRelations(IEnumerable<Item> items, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false, bool recursively = false) {
