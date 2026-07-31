@@ -8,14 +8,16 @@ public class Item(string type, string name, string revision) {
   public string Revision { get; init; } = revision;
   public string Maturity { get; set; } = "In Work";
   [JsonIgnore]
-  public List<Relation> Relations { get; init; } = [];
+  public List<Relation> OutRelations { get; init; } = [];
+  [JsonIgnore]
+  public List<Relation> InRelations { get; init; } = [];
+  [JsonIgnore]
+  public IEnumerable<Relation> Relations => OutRelations.Concat(InRelations);
+
+  private static readonly JsonSerializerOptions _serializerOptions = new() { PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
   public static Item Load(Dictionary<Guid, Item> database, JsonElement element) {
-    Guid id = Guid.Parse(element.GetProperty("id").GetString()!);
-    string type = element.GetProperty("type").GetString()!;
-    string name = element.GetProperty("name").GetString()!;
-    string revision = element.TryGetProperty("revision", out var rev) ? rev.GetString()! : "A";
-    string maturity = element.TryGetProperty("maturity", out var mat) ? mat.GetString()! : "In Work";
-    return database[id] = new Item(type, name, revision) { Id = id, Maturity = maturity };
+    Item item = element.Deserialize<Item>(_serializerOptions) ?? throw new JsonException("Item element deserialized to null");
+    return database[item.Id] = item;
   }
 }
 public class Relation {
@@ -29,11 +31,12 @@ public class Relation {
   public Guid ToId => ToItem.Id;
   public Relation(string fromPredicate, Item fromItem, string toPredicate, Item toItem) {
     FromPredicate = fromPredicate; FromItem = fromItem; ToPredicate = toPredicate; ToItem = toItem;
-    FromItem.Relations.Add(this); ToItem.Relations.Add(this);
+    FromItem.OutRelations.Add(this); ToItem.InRelations.Add(this);
   }
+
   public static Relation Load(Dictionary<Guid, Item> database, JsonElement element) {
-    Guid fromId = Guid.Parse(element.GetProperty("fromId").GetString()!);
-    Guid toId = Guid.Parse(element.GetProperty("toId").GetString()!);
+    Guid fromId =element.GetProperty("fromId").GetGuid();
+    Guid toId = element.GetProperty("toId").GetGuid();
     Item fromItem = database.GetValueOrDefault(fromId) ?? throw new InvalidDataException($"Unknown item id '{fromId}'.");
     Item toItem = database.GetValueOrDefault(toId) ?? throw new InvalidDataException($"Unknown item id '{toId}'.");
     string fromPredicate = element.GetProperty("fromPredicate").GetString()!;
@@ -59,8 +62,7 @@ public class FakePlmService {
       .Where(item => revision is null || item.Revision == revision);
   public Item? Fetch(Guid id) => _database.GetValueOrDefault(id);
   public IEnumerable<Relation> GetRelations(Item item, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false)
-    => item.Relations
-      .Where(rel => bidirectional || rel.FromItem == item)
+    => (bidirectional ? item.Relations : item.OutRelations)
       .Where(rel => fromPredicate?.Contains(rel.FromPredicate) ?? true)
       .Where(rel => toPredicate?.Contains(rel.ToPredicate) ?? true);
   public IEnumerable<Relation> GetRelations(IEnumerable<Item> items, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false, bool recursively = false) {

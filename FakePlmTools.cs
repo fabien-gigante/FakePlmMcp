@@ -30,7 +30,7 @@ public class FakePlmTools
   ) => _plm.Search(type, name, revision).Select(item => item.Id);
 
   [McpServerTool(ReadOnly = true),
-   Description("Returns the Items with the given Ids, in the same order as the input Ids. If an Id is unknown, null is returned in its place. Except from Id, all Item attributes can be shown to the user.")]
+   Description("Returns the Items with the given Ids, in the same order as the input Ids. If an Id is unknown, null is returned in its place. Except from Id, all Item attributes can be shown to the user. Attributes values, such as Name, shouldn't be used to infer connectivity or pairings, use get_relations instead.")]
   public IEnumerable<Item?> Fetch(
     [Description("The exact Item Ids to fetch. Ids should be kept internal and not shown to the user.")]
     Guid[] ids
