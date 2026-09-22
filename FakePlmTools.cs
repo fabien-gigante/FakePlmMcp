@@ -18,6 +18,10 @@ public class FakePlmTools
   public FakePlmTools(FakePlmService plm) => _plm = plm;
 
   [McpServerTool(ReadOnly = true),
+   Description("Returns the PLM ontology: distinct relation predicate names, item types, and maturity states. Use this to learn valid filter values before calling search or get_relations, or valid state names when doing maturity analysis.. Once call once during discovery, subsequent calls should use the values returned here rather than re-running the discovery.")]
+  public Ontology GetOntology() => _plm.GetOntology(); 
+
+  [McpServerTool(ReadOnly = true),
    Description("Searches the PLM database for Ids of Items matching the given criteria. All filters are combined with AND; leave a filter 'null' to not restrict on it. Item Ids should be kept internal and not shown to the user.")]
   public IEnumerable<Guid> Search(
     [Description("The exact Type of Item to look for. Any type if 'null' is given.")]
@@ -51,4 +55,18 @@ public class FakePlmTools
     [Description("When recursively is 'true', the returned relation set is exhaustive for the given predicates — every descendant reachable via those predicates is included. When recursively is 'true', callers should treat items with no outgoing relations in the result as confirmed leaf nodes, not as unexplored. Using recursion without predicates should be avoided.")]
     bool recursively = false
   ) => _plm.GetRelations(Fetch(ids).Where(item => item is not null)!, fromPredicate, toPredicate, bidirectional, recursively);
+
+  [McpServerTool(ReadOnly = true),
+   Description("Returns the revision graphs for the given Items: same as get_relations, but predicates are limited to those ending with \"Revision\" from the ontology (e.g. Next/Previous/Derivative/Source Revision). Defaults to bidirectional, recursive traversal so connected revision chains are returned in one call.")]
+  public IEnumerable<Relation> GetRevisionGraphs(
+    [Description("The exact Item Ids. (Ids should be kept internal and not shown to the user.)")]
+    Guid[] ids,
+    [Description("If 'true', both descendant and ancestor revisions are included.")]
+    bool bidirectional = true,
+    [Description("If 'true', explores the revision graph transitively until it is fully explored.")]
+    bool recursively = true
+  ) {
+    string[] revisionPredicates = _plm.GetOntology().Predicates.Where(p => p.EndsWith("Revision", StringComparison.Ordinal)).ToArray();
+    return GetRelations(ids, revisionPredicates, revisionPredicates, bidirectional, recursively);
+  }
 }

@@ -13,8 +13,9 @@ public class Item(string type, string name, string revision = "A") {
   public List<Relation> InRelations { get; init; } = [];
 
   private static readonly JsonSerializerOptions _serializerOptions = new() { PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-  public static Item Load(Dictionary<Guid, Item> database, JsonElement element) {
+  public static Item Load(Ontology ontology, Dictionary<Guid, Item> database, JsonElement element) {
     Item item = element.Deserialize<Item>(_serializerOptions) ?? throw new JsonException("Item element deserialized to null");
+    ontology.Types.Add(item.Type); ontology.States.Add(item.Maturity);
     return database[item.Id] = item;
   }
 }
@@ -32,22 +33,30 @@ public class Relation {
     FromItem.OutRelations.Add(this); ToItem.InRelations.Add(this);
   }
 
-  public static Relation Load(Dictionary<Guid, Item> database, JsonElement element) {
+  public static Relation Load(Ontology ontology, Dictionary < Guid, Item> database, JsonElement element)  {
     Guid fromId = element.GetProperty("fromId").GetGuid(), toId = element.GetProperty("toId").GetGuid();
     Item fromItem = database.GetValueOrDefault(fromId) ?? throw new InvalidDataException($"Unknown item id '{fromId}'.");
     Item toItem = database.GetValueOrDefault(toId) ?? throw new InvalidDataException($"Unknown item id '{toId}'.");
     string fromPredicate = element.GetProperty("fromPredicate").GetString()!, toPredicate = element.GetProperty("toPredicate").GetString()!;
+    ontology.Predicates.Add(fromPredicate); ontology.Predicates.Add(toPredicate);
     return new Relation(fromPredicate, fromItem, toPredicate, toItem);
   }
+}
+
+public class Ontology {
+  public HashSet<string> Types { get; } = [];
+  public HashSet<string> Predicates { get; } = [];
+  public HashSet<string> States { get; } = [];
 }
 
 public class FakePlmService {
   private static readonly string _datasetFilename = "PlmDataset.json";
   private readonly Dictionary<Guid, Item> _database = [];
+  private readonly Ontology _ontology = new();
   public FakePlmService() {
     using var dataset = JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, _datasetFilename)));
-    foreach (var element in dataset.RootElement.GetProperty("items").EnumerateArray()) Item.Load(_database, element);
-    foreach (var element in dataset.RootElement.GetProperty("relations").EnumerateArray()) Relation.Load(_database, element);
+    foreach (var element in dataset.RootElement.GetProperty("items").EnumerateArray()) Item.Load(_ontology, _database, element);
+    foreach (var element in dataset.RootElement.GetProperty("relations").EnumerateArray()) Relation.Load(_ontology, _database, element);
   }
   public IEnumerable<Item> Search(string? type, string? name, string? revision)
     => _database.Values
@@ -55,6 +64,7 @@ public class FakePlmService {
       .Where(item => name is null || item.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase))
       .Where(item => revision is null || item.Revision == revision);
   public Item? Fetch(Guid id) => _database.GetValueOrDefault(id);
+  public Ontology GetOntology() => _ontology;
   public IEnumerable<Relation> GetRelations(Item item, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false)
     => (bidirectional ? item.OutRelations.Concat(item.InRelations) : item.OutRelations)
       .Where(rel => fromPredicate?.Contains(rel.FromPredicate) ?? true)
