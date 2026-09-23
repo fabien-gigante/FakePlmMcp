@@ -15,7 +15,7 @@ public class Item(string type, string name, string revision = "A") {
   private static readonly JsonSerializerOptions _serializerOptions = new() { PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
   public static Item Load(Ontology ontology, Dictionary<Guid, Item> database, JsonElement element) {
     Item item = element.Deserialize<Item>(_serializerOptions) ?? throw new JsonException("Item element deserialized to null");
-    ontology.Types.Add(item.Type); ontology.States.Add(item.Maturity);
+    ontology.Types.Add(item.Type); ontology.MaturityStates.Add(item.Maturity);
     return database[item.Id] = item;
   }
 }
@@ -38,15 +38,16 @@ public class Relation {
     Item fromItem = database.GetValueOrDefault(fromId) ?? throw new InvalidDataException($"Unknown item id '{fromId}'.");
     Item toItem = database.GetValueOrDefault(toId) ?? throw new InvalidDataException($"Unknown item id '{toId}'.");
     string fromPredicate = element.GetProperty("fromPredicate").GetString()!, toPredicate = element.GetProperty("toPredicate").GetString()!;
-    ontology.Predicates.Add(fromPredicate); ontology.Predicates.Add(toPredicate);
+    ontology.FromPredicates.Add(fromPredicate); ontology.ToPredicates.Add(toPredicate);
     return new Relation(fromPredicate, fromItem, toPredicate, toItem);
   }
 }
 
 public class Ontology {
   public HashSet<string> Types { get; } = [];
-  public HashSet<string> Predicates { get; } = [];
-  public HashSet<string> States { get; } = [];
+  public HashSet<string> FromPredicates { get; } = [];
+  public HashSet<string> ToPredicates { get; } = [];
+  public HashSet<string> MaturityStates { get; } = [];
 }
 
 public class FakePlmService {
