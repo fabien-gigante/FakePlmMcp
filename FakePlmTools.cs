@@ -18,19 +18,19 @@ public class FakePlmTools
   public FakePlmTools(FakePlmService plm) => _plm = plm;
 
   [McpServerTool(ReadOnly = true),
-   Description("Returns the PLM ontology: distinct relation predicate names, item types, and maturity states. Use this to learn valid filter values before calling search or get_relations, or valid state names when doing maturity analysis.. Once call once during discovery, subsequent calls should use the values returned here rather than re-running the discovery.")]
+   Description("Returns the PLM ontology: distinct relation item types, relation types, predicate names, and maturity states. Use this to learn valid filter values before calling search or get_relations, or valid state names when doing maturity analysis.. Once call once during discovery, subsequent calls should use the values returned here rather than re-running the discovery.")]
   public Ontology GetOntology() => _plm.GetOntology(); 
 
   [McpServerTool(ReadOnly = true),
    Description("Searches the PLM database for Ids of Items matching the given criteria. All filters are combined with AND; leave a filter 'null' to not restrict on it. Item Ids should be kept internal and not shown to the user.")]
   public IEnumerable<Guid> Search(
-    [Description("The exact Type of Item to look for. Any type if 'null' is given.")]
-    string? type,
+    [Description("The exact Types of Item to look for. Any types if 'null' is given.")]
+    string[]? types,
     [Description("A case-insensitive substring to look for in the Item's Name.")]
     string name,
     [Description("The exact Revision to look for. All are returned if 'null' is given.")]
     string? revision
-  ) => _plm.Search(type, name, revision).Select(item => item.Id);
+  ) => _plm.Search(types, name, revision).Select(item => item.Id);
 
   [McpServerTool(ReadOnly = true),
    Description("Returns the Items with the given Ids, in the same order as the input Ids. If an Id is unknown, null is returned in its place. Except from Id, all Item attributes can be shown to the user. Attributes values, such as Name, shouldn't be used to infer connectivity or pairings, use get_relations instead.")]
@@ -44,6 +44,9 @@ public class FakePlmTools
   public IEnumerable<Relation> GetRelations(
     [Description("The exact Item Ids. (Ids should be kept internal and not shown to the user.)")]
     Guid[] ids,
+    [Description("Criteria for Relation types to consider for the related Items. Strongly recommended over leaving 'null'. Leave 'null' only on your first discovery call for a given set of items/domains. If used soley for discovery, batching multiple ids is still ok, but using recursion should generally be avoided. Once a call has revealed the relation types relevant to your task, all subsequent calls for that same purpose must pass those types explicitly rather than re-running unfiltered.")]
+    [DefaultValue(new[] { "Instance" })]
+    string[]? relTypes = null,
     [Description("Criteria for Relation predicates to consider FROM the related Items. Strongly recommended over leaving 'null'. Leave 'null' only on your first discovery call for a given set of items/domains. If used soley for discovery, batching multiple ids is still ok, but using recursion should generally be avoided. Once a call has revealed the predicate names relevant to your task, all subsequent calls for that same purpose must pass those predicates explicitly rather than re-running unfiltered.")]
     [DefaultValue(new[] { "Parent" })]
     string[]? fromPredicate = null,
@@ -54,7 +57,7 @@ public class FakePlmTools
     bool bidirectional = false,
     [Description("When recursively is 'true', the returned relation set is exhaustive for the given predicates — every descendant reachable via those predicates is included. When recursively is 'true', callers should treat items with no outgoing relations in the result as confirmed leaf nodes, not as unexplored. Using recursion without predicates should be avoided.")]
     bool recursively = false
-  ) => _plm.GetRelations(Fetch(ids).Where(item => item is not null)!, fromPredicate, toPredicate, bidirectional, recursively);
+  ) => _plm.GetRelations(Fetch(ids).Where(item => item is not null)!, relTypes,fromPredicate, toPredicate, bidirectional, recursively);
 
   [McpServerTool(ReadOnly = true),
    Description("Returns the revision graphs for the given Items: same as get_relations, but predicates are limited to those ending with \"Revision\" from the ontology (e.g. Next/Previous/Derivative/Source Revision). Defaults to bidirectional, recursive traversal so connected revision chains are returned in one call.")]
@@ -65,8 +68,5 @@ public class FakePlmTools
     bool bidirectional = true,
     [Description("If 'true', explores the revision graph transitively until it is fully explored.")]
     bool recursively = true
-  ) {
-    string[] revisionPredicates = _plm.GetOntology().Predicates.Where(p => p.EndsWith("Revision", StringComparison.Ordinal)).ToArray();
-    return GetRelations(ids, revisionPredicates, revisionPredicates, bidirectional, recursively);
-  }
+  ) => GetRelations(ids, ["Revision"], null, null, bidirectional, recursively);
 }
