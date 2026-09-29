@@ -82,13 +82,18 @@ public class FakePlmService {
       .Where(rel => relTypes?.Contains(rel.Definition.Type) ?? true)
       .Where(rel => fromPredicate?.Contains(rel.Definition.From) ?? true)
       .Where(rel => toPredicate?.Contains(rel.Definition.To) ?? true);
-  public IEnumerable<Relation> GetRelations(IEnumerable<Item> items, string[]? relTypes, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false, bool recursively = false) {
-    HashSet<Item> visitedItems = [.. items];
-    HashSet<Relation> visitedRelations = [];
-    Queue<Item> queue = new(visitedItems);
-    while (queue.TryDequeue(out var item))
-      foreach (var relation in GetRelations(item, relTypes, fromPredicate, toPredicate, bidirectional).Where(visitedRelations.Add))
-        if (recursively && visitedItems.Add(relation.ToItem)) queue.Enqueue(relation.ToItem);
+  public IEnumerable<Relation> GetRelations(IEnumerable<Item> items, string[]? relTypes, string[]? fromPredicate, string[]? toPredicate, bool bidirectional = false, int depth = 1)
+  {
+    if (depth < -1) throw new ArgumentOutOfRangeException(nameof(depth), depth, "depth must be -1 (unlimited), 0, or a positive number of hops.");
+    if (depth == 0) return [];
+    HashSet<Item> visitedItems = [.. items]; HashSet<Relation> visitedRelations = [];
+    Queue<(Item item, int depth)> queue = new(items.Select(i => (i, 0)));
+    while (queue.TryDequeue(out var current))
+      foreach (var relation in GetRelations(current.item, relTypes, fromPredicate, toPredicate, bidirectional).Where(visitedRelations.Add)) {
+        Item other = relation.ToItem == current.item ? relation.FromItem : relation.ToItem;
+        if ((depth == -1 || current.depth + 1 < depth) && visitedItems.Add(other))
+          queue.Enqueue((other, current.depth + 1));
+      }
     return visitedRelations;
   }
 }
