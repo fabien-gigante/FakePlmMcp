@@ -22,27 +22,29 @@ public class FakePlmTools
   public Ontology GetOntology() => _plm.GetOntology(); 
 
   [McpServerTool(ReadOnly = true),
-   Description("Searches the PLM database for Ids of Items matching the given criteria. All filters are combined with AND; leave a filter 'null' to not restrict on it. Item Ids should be kept internal and not shown to the user.")]
+   Description("Searches the PLM database for Ids of Items matching the given criteria. All filters are combined with AND; leave a filter 'null' to not restrict on it. Item Ids should be kept internal and must never appear in any user-facing text. At least one filter must be specified, narrow the searches as much as possible to avoid comprehensive scans.")]
   public IEnumerable<Guid> Search(
     [Description("The exact Types of Item to look for. Any types if 'null' is given.")]
     string[]? types,
-    [Description("A case-insensitive substring to look for in the Item's Name.")]
-    string name,
+    [Description("A case-insensitive substring to look for in the Item's Name. All are returned if 'null' is given.")]
+    string? name,
     [Description("The exact Revision to look for. All are returned if 'null' is given.")]
-    string? revision
-  ) => _plm.Search(types, name, revision).Select(item => item.Id);
+    string? revision,
+    [Description("A case-insensitive substring to look for in any of the Item's attribute values. All are returned if 'null' is given.")]
+    string? text
+  ) => _plm.Search(types, name, revision, text).Select(item => item.Id);
 
   [McpServerTool(ReadOnly = true),
    Description("Returns the Items with the given Ids, in the same order as the input Ids. If an Id is unknown, null is returned in its place. Except from Id, all Item attributes can be shown to the user. Attributes values, such as Name, shouldn't be used to infer connectivity or pairings, use get_relations instead.")]
   public IEnumerable<Item?> Fetch(
-    [Description("The exact Item Ids to fetch. Ids should be kept internal and not shown to the user.")]
+    [Description("The exact Item Ids to fetch. Ids should be kept internal and must never appear in any user-facing text.")]
     Guid[] ids
   ) => ids.Select(id => _plm.Fetch(id));
 
   [McpServerTool(ReadOnly = true),
-   Description("Returns all Relations of Items with the given Ids. If an Id is unknown, it is ignored. Always batch similar lookups together rather than calling once per Id. If you already made one recursive call covering a set, you can safely assume that the result is exhaustive for the given predicates.")]
+   Description("Returns all Relations of Items with the given Ids. If an Id is unknown, it is ignored. Always batch similar lookups together rather than calling once per Id. If you already made one recursive call covering a set, you can safely assume that the result is exhaustive for the given predicates. Always consider the from and to predicates in the results to interpret the relation semantic and direction, not the relation type alone.")]
   public IEnumerable<Relation> GetRelations(
-    [Description("The exact Item Ids. (Ids should be kept internal and not shown to the user.)")]
+    [Description("The exact Item Ids. (Ids should be kept internal and must never appear in any user-facing text    .)")]
     Guid[] ids,
     [Description("Criteria for Relation types to consider for the related Items. Strongly recommended over leaving 'null'. Leave 'null' only on your first discovery call for a given set of items/domains. If used soley for discovery, batching multiple ids is still ok, but using recursion should generally be avoided. Once a call has revealed the relation types relevant to your task, all subsequent calls for that same purpose must pass those types explicitly rather than re-running unfiltered.")]
     [DefaultValue(new[] { "Instance" })]
@@ -60,9 +62,9 @@ public class FakePlmTools
   ) => _plm.GetRelations(Fetch(ids).Where(item => item is not null)!, relTypes,fromPredicate, toPredicate, bidirectional, recursively);
 
   [McpServerTool(ReadOnly = true),
-   Description("Returns the revision graphs for the given Items: same as get_relations, but predicates are limited to those ending with \"Revision\" from the ontology (e.g. Next/Previous/Derivative/Source Revision). Defaults to bidirectional, recursive traversal so connected revision chains are returned in one call.")]
+   Description("Returns the revision graphs for the given Items: same as get_relations, but limited to the \"Revision\" relation type. Defaults to bidirectional, recursive traversal so connected revision chains are returned in one call. Always consider the from and to predicates in the results to interpret the revision graph semantic and chaining order, not the relation type alone.")]
   public IEnumerable<Relation> GetRevisionGraphs(
-    [Description("The exact Item Ids. (Ids should be kept internal and not shown to the user.)")]
+    [Description("The exact Item Ids. (Ids should be kept internal and must never appear in any user-facing text.)")]
     Guid[] ids,
     [Description("If 'true', both descendant and ancestor revisions are included.")]
     bool bidirectional = true,

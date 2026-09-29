@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="tools\**" />
     <None Update="PlmDataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

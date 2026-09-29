@@ -1,97 +1,892 @@
 {
   "items": [
-    { "id": "00000000-0000-0000-0000-000000000001", "type": "Eng Item", "name": "Prd Root" },
-    { "id": "00000000-0000-0000-0000-000000000002", "type": "Eng Item", "name": "Prd 1", "maturity": "Frozen" },
-    { "id": "00000000-0000-0000-0000-000000000003", "type": "Eng Item", "name": "Prd 2", "revision": "B", "maturity": "Obsolete" },
-    { "id": "00000000-0000-0000-0000-000000000004", "type": "Manuf Item", "name": "Mfg Prd Root" },
-    { "id": "00000000-0000-0000-0000-000000000005", "type": "Manuf Item", "name": "Mfg Prd 1", "revision": "B", "maturity": "Draft" },
-    { "id": "00000000-0000-0000-0000-000000000006", "type": "Manuf Item", "name": "Mfg Prd 2" },
-    { "id": "00000000-0000-0000-0000-000000000007", "type": "Eng Item", "name": "Prd 2", "revision": "A", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000008", "type": "Manuf Item", "name": "Mfg Prd 1", "revision": "A" },
-    { "id": "00000000-0000-0000-0000-000000000009", "type": "Eng Item", "name": "Prd 2a" },
-    { "id": "00000000-0000-0000-0000-000000000010", "type": "Eng Item", "name": "Prd 3", "revision": "A", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000011", "type": "Eng Item", "name": "Prd 3", "revision": "B", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000012", "type": "Eng Item", "name": "Prd 4", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000013", "type": "Eng Item", "name": "Prd 5", "revision": "B", "maturity": "Frozen" },
-    { "id": "00000000-0000-0000-0000-000000000014", "type": "Eng Item", "name": "Prd 5", "revision": "A", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000015", "type": "Eng Item", "name": "Prd 6", "revision": "B", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000016", "type": "Eng Item", "name": "Prd 6", "revision": "A", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000017", "type": "Eng Item", "name": "Prd 7", "revision": "C", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000018", "type": "Eng Item", "name": "Prd 7", "revision": "B", "maturity": "Frozen" },
-    { "id": "00000000-0000-0000-0000-000000000019", "type": "Eng Item", "name": "Prd 7", "revision": "A", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000020", "type": "Eng Item", "name": "Prd 8", "revision": "C", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000021", "type": "Eng Item", "name": "Prd 8", "revision": "B", "maturity": "Frozen" },
-    { "id": "00000000-0000-0000-0000-000000000022", "type": "Eng Item", "name": "Prd 8", "revision": "A", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000023", "type": "Eng Item", "name": "Prd 8a", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000024", "type": "Manuf Item", "name": "Mfg Prd 3" },
-    { "id": "00000000-0000-0000-0000-000000000025", "type": "Manuf Item", "name": "Mfg Prd 5", "revision": "B", "maturity": "Draft" },
-    { "id": "00000000-0000-0000-0000-000000000026", "type": "Manuf Item", "name": "Mfg Prd 6", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000027", "type": "Manuf Item", "name": "Mfg Prd 7", "revision": "B", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000028", "type": "Manuf Item", "name": "Mfg Prd 8", "revision": "B", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000029", "type": "Manuf Item", "name": "Mfg Prd 9", "maturity": "Frozen" },
-    { "id": "00000000-0000-0000-0000-000000000030", "type": "Eng Item", "name": "Prd 3", "revision": "C", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000031", "type": "Eng Item", "name": "Prd 2", "revision": "C", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000032", "type": "Eng Item", "name": "Prd 7", "revision": "D", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000033", "type": "Eng Item", "name": "Prd 8", "revision": "D", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000034", "type": "Eng Item", "name": "Prd 7a", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000035", "type": "Eng Item", "name": "Prd 8b", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000036", "type": "Eng Item", "name": "Prd 1", "revision": "B", "maturity": "Released" },
-    { "id": "00000000-0000-0000-0000-000000000037", "type": "Eng Item", "name": "Prd 1", "revision": "C", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000038", "type": "Eng Item", "name": "Prd 5", "revision": "C", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000039", "type": "Eng Item", "name": "Prd 6", "revision": "C", "maturity": "In Work" },
-    { "id": "00000000-0000-0000-0000-000000000040", "type": "Eng Item", "name": "Prd 3a", "maturity": "In Work" }
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "type": "Eng Item",
+      "name": "Prd Root",
+      "attributes": {
+        "title": "Vehicle platform (engineering)",
+        "description": "Top-level engineering assembly for the sample vehicle platform."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "type": "Eng Item",
+      "name": "Prd 1",
+      "maturity": "Frozen",
+      "attributes": {
+        "title": "Front structure",
+        "description": "Front structural subassembly; carries primary load paths at the nose."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000003",
+      "type": "Eng Item",
+      "name": "Prd 2",
+      "revision": "B",
+      "maturity": "Obsolete",
+      "attributes": {
+        "title": "Mid-body module",
+        "description": "Mid-body structural module; interfaces left and right side panels."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000004",
+      "type": "Manuf Item",
+      "name": "Mfg Prd Root",
+      "attributes": {
+        "title": "Vehicle platform (manufacturing)",
+        "description": "Plant-level manufacturing definition for the platform top assembly."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000005",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 1",
+      "revision": "B",
+      "maturity": "Draft",
+      "attributes": {
+        "title": "Front structure (mfg)",
+        "description": "Shop-floor build sequence and tooling for the front structure."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000006",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 2",
+      "attributes": {
+        "title": "Mid-body module (mfg)",
+        "description": "Fabrication and assembly instructions for the mid-body module."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000007",
+      "type": "Eng Item",
+      "name": "Prd 2",
+      "revision": "A",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Mid-body module",
+        "description": "Mid-body structural module; interfaces left and right side panels."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000008",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 1",
+      "revision": "A",
+      "attributes": {
+        "title": "Front structure (mfg)",
+        "description": "Shop-floor build sequence and tooling for the front structure."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000009",
+      "type": "Eng Item",
+      "name": "Prd 2a",
+      "attributes": {
+        "title": "Mid-body (regional variant)",
+        "description": "Alternate mid-body layout variant for a regional market package."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000010",
+      "type": "Eng Item",
+      "name": "Prd 3",
+      "revision": "A",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Power distribution unit",
+        "description": "Power distribution unit; routes high-voltage feeds to downstream modules."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000011",
+      "type": "Eng Item",
+      "name": "Prd 3",
+      "revision": "B",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Power distribution unit",
+        "description": "Power distribution unit; routes high-voltage feeds to downstream modules."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000012",
+      "type": "Eng Item",
+      "name": "Prd 4",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Cabin comfort module",
+        "description": "Cabin comfort module; HVAC and interior thermal management."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000013",
+      "type": "Eng Item",
+      "name": "Prd 5",
+      "revision": "B",
+      "maturity": "Frozen",
+      "attributes": {
+        "title": "Rear closure",
+        "description": "Rear closure engineering definition; latch and sealing interfaces."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000014",
+      "type": "Eng Item",
+      "name": "Prd 5",
+      "revision": "A",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Rear closure",
+        "description": "Rear closure engineering definition; latch and sealing interfaces."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000015",
+      "type": "Eng Item",
+      "name": "Prd 6",
+      "revision": "B",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Wheel arch assembly",
+        "description": "Wheel arch and fender envelope; defines tire clearance volume."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000016",
+      "type": "Eng Item",
+      "name": "Prd 6",
+      "revision": "A",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Wheel arch assembly",
+        "description": "Wheel arch and fender envelope; defines tire clearance volume."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000017",
+      "type": "Eng Item",
+      "name": "Prd 7",
+      "revision": "C",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Instrument panel carrier",
+        "description": "Instrument panel carrier; mounting for displays and controls."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000018",
+      "type": "Eng Item",
+      "name": "Prd 7",
+      "revision": "B",
+      "maturity": "Frozen",
+      "attributes": {
+        "title": "Instrument panel carrier",
+        "description": "Instrument panel carrier; mounting for displays and controls."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000019",
+      "type": "Eng Item",
+      "name": "Prd 7",
+      "revision": "A",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Instrument panel carrier",
+        "description": "Instrument panel carrier; mounting for displays and controls."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000020",
+      "type": "Eng Item",
+      "name": "Prd 8",
+      "revision": "C",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Battery enclosure",
+        "description": "Battery enclosure; structural and thermal boundary for the pack."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000021",
+      "type": "Eng Item",
+      "name": "Prd 8",
+      "revision": "B",
+      "maturity": "Frozen",
+      "attributes": {
+        "title": "Battery enclosure",
+        "description": "Battery enclosure; structural and thermal boundary for the pack."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000022",
+      "type": "Eng Item",
+      "name": "Prd 8",
+      "revision": "A",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Battery enclosure",
+        "description": "Battery enclosure; structural and thermal boundary for the pack."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000023",
+      "type": "Eng Item",
+      "name": "Prd 8a",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Battery enclosure (prototype)",
+        "description": "Early prototype enclosure used before crash-test iterations."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000024",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 3",
+      "attributes": {
+        "title": "PDU (mfg)",
+        "description": "Manufacturing bill for the power distribution unit."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000025",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 5",
+      "revision": "B",
+      "maturity": "Draft",
+      "attributes": {
+        "title": "Rear closure (mfg)",
+        "description": "Stampings, welds, and hardware kit for the rear closure."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000026",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 6",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Wheel arch (mfg)",
+        "description": "Composite and sheet-metal mix for wheel-arch assemblies."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000027",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 7",
+      "revision": "B",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Instrument panel (mfg)",
+        "description": "Trim-line fixtures and part kit for the instrument panel area."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000028",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 8",
+      "revision": "B",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Battery pack assembly",
+        "description": "Pack assembly station layout and torque specifications for the enclosure."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000029",
+      "type": "Manuf Item",
+      "name": "Mfg Prd 9",
+      "maturity": "Frozen",
+      "attributes": {
+        "title": "Enclosure service kit",
+        "description": "Spare service kit grouping for field-replaceable enclosure hardware."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000030",
+      "type": "Eng Item",
+      "name": "Prd 3",
+      "revision": "C",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Power distribution unit",
+        "description": "Power distribution unit; routes high-voltage feeds to downstream modules."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000031",
+      "type": "Eng Item",
+      "name": "Prd 2",
+      "revision": "C",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Mid-body module",
+        "description": "Mid-body structural module; interfaces left and right side panels."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000032",
+      "type": "Eng Item",
+      "name": "Prd 7",
+      "revision": "D",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Instrument panel carrier",
+        "description": "Instrument panel carrier; mounting for displays and controls."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000033",
+      "type": "Eng Item",
+      "name": "Prd 8",
+      "revision": "D",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Battery enclosure",
+        "description": "Battery enclosure; structural and thermal boundary for the pack."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000034",
+      "type": "Eng Item",
+      "name": "Prd 7a",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "IP carrier (value trim)",
+        "description": "Simplified IP carrier for a cost-reduced trim level."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000035",
+      "type": "Eng Item",
+      "name": "Prd 8b",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Battery enclosure (lightweight)",
+        "description": "Lightweight enclosure variant targeting extended-range builds."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000036",
+      "type": "Eng Item",
+      "name": "Prd 1",
+      "revision": "B",
+      "maturity": "Released",
+      "attributes": {
+        "title": "Front structure",
+        "description": "Front structural subassembly; carries primary load paths at the nose."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000037",
+      "type": "Eng Item",
+      "name": "Prd 1",
+      "revision": "C",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Front structure",
+        "description": "Front structural subassembly; carries primary load paths at the nose."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000038",
+      "type": "Eng Item",
+      "name": "Prd 5",
+      "revision": "C",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Rear closure",
+        "description": "Rear closure engineering definition; latch and sealing interfaces."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000039",
+      "type": "Eng Item",
+      "name": "Prd 6",
+      "revision": "C",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "Wheel arch assembly",
+        "description": "Wheel arch and fender envelope; defines tire clearance volume."
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000040",
+      "type": "Eng Item",
+      "name": "Prd 3a",
+      "maturity": "In Work",
+      "attributes": {
+        "title": "PDU (bench layout)",
+        "description": "Experimental PDU layout used for bench validation only."
+      }
+    }
   ],
   "relations": [
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000001", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000002", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000001", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000003", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000001", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000010", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000001", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000012", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000001", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000013", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000001", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000017", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000001", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000020", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000013", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000015", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000005", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000006", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000024", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000025", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000026", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000027", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000028", "toPredicate": "Child" },
-    { "type": "Instance", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Parent", "toId": "00000000-0000-0000-0000-000000000029", "toPredicate": "Child" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000004", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000001", "toPredicate": "Scoped" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000005", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000002", "toPredicate": "Scoped" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000006", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000003", "toPredicate": "Scoped" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000024", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000010", "toPredicate": "Scoped" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000025", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000013", "toPredicate": "Scoped" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000026", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000016", "toPredicate": "Scoped" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000027", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000018", "toPredicate": "Scoped" },
-    { "type": "Implement", "fromId": "00000000-0000-0000-0000-000000000028", "fromPredicate": "Scoping", "toId": "00000000-0000-0000-0000-000000000021", "toPredicate": "Scoped" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000007", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000003", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000003", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000031", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000008", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000005", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000010", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000011", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000011", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000030", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000002", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000036", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000036", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000037", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000014", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000013", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000013", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000038", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000016", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000015", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000015", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000039", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000019", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000018", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000018", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000017", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000017", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000032", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000022", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000021", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000021", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000020", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000020", "fromPredicate": "Next Revision", "toId": "00000000-0000-0000-0000-000000000033", "toPredicate": "Previous Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000009", "fromPredicate": "Derivative Revision", "toId": "00000000-0000-0000-0000-000000000003", "toPredicate": "Source Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000023", "fromPredicate": "Derivative Revision", "toId": "00000000-0000-0000-0000-000000000021", "toPredicate": "Source Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000034", "fromPredicate": "Derivative Revision", "toId": "00000000-0000-0000-0000-000000000018", "toPredicate": "Source Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000035", "fromPredicate": "Derivative Revision", "toId": "00000000-0000-0000-0000-000000000020", "toPredicate": "Source Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000040", "fromPredicate": "Derivative Revision", "toId": "00000000-0000-0000-0000-000000000011", "toPredicate": "Source Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000011", "fromPredicate": "Merged Revision", "toId": "00000000-0000-0000-0000-000000000009", "toPredicate": "Integrate Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000020", "fromPredicate": "Merged Revision", "toId": "00000000-0000-0000-0000-000000000023", "toPredicate": "Integrate Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000017", "fromPredicate": "Merged Revision", "toId": "00000000-0000-0000-0000-000000000034", "toPredicate": "Integrate Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000030", "fromPredicate": "Merged Revision", "toId": "00000000-0000-0000-0000-000000000040", "toPredicate": "Integrate Revision" },
-    { "type": "Revision", "fromId": "00000000-0000-0000-0000-000000000033", "fromPredicate": "Merged Revision", "toId": "00000000-0000-0000-0000-000000000035", "toPredicate": "Integrate Revision" }
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000001",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000002",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000001",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000003",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000001",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000010",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000001",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000012",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000001",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000013",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000001",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000017",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000001",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000020",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000013",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000015",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000005",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000006",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000024",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000025",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000026",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000027",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000028",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Instance",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Parent",
+      "toId": "00000000-0000-0000-0000-000000000029",
+      "toPredicate": "Child"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000004",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000001",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000005",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000002",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000006",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000003",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000024",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000010",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000025",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000013",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000026",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000016",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000027",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000018",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Implement",
+      "fromId": "00000000-0000-0000-0000-000000000028",
+      "fromPredicate": "Scoping",
+      "toId": "00000000-0000-0000-0000-000000000021",
+      "toPredicate": "Scoped"
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000003",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000007",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Addressed durability test feedback on side-panel attachments."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000031",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000003",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Opened the next change window for interface updates with adjacent modules."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000005",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000008",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Updated fabrication sequence to match new weld fixtures on the line."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000011",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000010",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Rerouted bus bars to improve service access in the field."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000030",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000011",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Carried forward pending harness changes into the main product line."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000036",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000002",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Established a released baseline for dependent assemblies."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000037",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000036",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Continued nose-structure refinement from wind-tunnel results."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000013",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000014",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Frozen latch hard points ahead of sealing tool design."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000038",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000013",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Exploring sealed closure geometry for an upcoming trim package."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000015",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000016",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Adjusted wheel-arch envelope for a new wheel and tire combination."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000039",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000015",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Active sculpt and surface updates on the fender line."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000018",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000019",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Added mounting features for the next-generation display module."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000017",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000018",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Rebalanced wiring channels after harness routing study."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000032",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000017",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Integrating carrier and trim-interface changes in one revision."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000021",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000022",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Baseline enclosure layout for initial crash and leak correlation."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000020",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000021",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Thermal layout change driven by a new cell module supplier."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000033",
+      "fromPredicate": "Next Revision",
+      "toId": "00000000-0000-0000-0000-000000000020",
+      "toPredicate": "Previous Revision",
+      "attributes": {
+        "intent": "evolution",
+        "comment": "Ongoing mass and sealing improvements on the production intent design."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000009",
+      "fromPredicate": "Branched Revision",
+      "toId": "00000000-0000-0000-0000-000000000003",
+      "toPredicate": "Source Revision",
+      "attributes": {
+        "intent": "derivative",
+        "comment": "Branched layout to satisfy regional packaging regulations."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000023",
+      "fromPredicate": "Branched Revision",
+      "toId": "00000000-0000-0000-0000-000000000021",
+      "toPredicate": "Source Revision",
+      "attributes": {
+        "intent": "study",
+        "comment": "Early shell used for fit and clearance checks before crash iterations."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000034",
+      "fromPredicate": "Branched Revision",
+      "toId": "00000000-0000-0000-0000-000000000018",
+      "toPredicate": "Source Revision",
+      "attributes": {
+        "intent": "derivative",
+        "comment": "Simplified carrier concept for a cost-focused trim level."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000035",
+      "fromPredicate": "Branched Revision",
+      "toId": "00000000-0000-0000-0000-000000000020",
+      "toPredicate": "Source Revision",
+      "attributes": {
+        "intent": "derivative",
+        "comment": "Lightweight enclosure concept targeting extended-range packaging."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000040",
+      "fromPredicate": "Branched Revision",
+      "toId": "00000000-0000-0000-0000-000000000011",
+      "toPredicate": "Source Revision",
+      "attributes": {
+        "intent": "study",
+        "comment": "Bench PDU layout to validate routing before merging into the main line."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000011",
+      "fromPredicate": "Merged Revision",
+      "toId": "00000000-0000-0000-0000-000000000009",
+      "toPredicate": "Integrate Revision",
+      "attributes": {
+        "intent": "integrate",
+        "comment": "Absorbed the regional mid-body variant into the primary design line."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000020",
+      "fromPredicate": "Merged Revision",
+      "toId": "00000000-0000-0000-0000-000000000023",
+      "toPredicate": "Integrate Revision",
+      "attributes": {
+        "intent": "integrate",
+        "comment": "Merged prototype enclosure learnings into the active development revision."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000017",
+      "fromPredicate": "Merged Revision",
+      "toId": "00000000-0000-0000-0000-000000000034",
+      "toPredicate": "Integrate Revision",
+      "attributes": {
+        "intent": "integrate",
+        "comment": "Folded the value-trim carrier concept into the main instrument panel line."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000030",
+      "fromPredicate": "Merged Revision",
+      "toId": "00000000-0000-0000-0000-000000000040",
+      "toPredicate": "Integrate Revision",
+      "attributes": {
+        "intent": "integrate",
+        "comment": "Incorporated bench PDU validation results into the consolidated PDU revision."
+      }
+    },
+    {
+      "type": "Revision",
+      "fromId": "00000000-0000-0000-0000-000000000033",
+      "fromPredicate": "Merged Revision",
+      "toId": "00000000-0000-0000-0000-000000000035",
+      "toPredicate": "Integrate Revision",
+      "attributes": {
+        "intent": "integrate",
+        "comment": "Pulled lightweight enclosure changes into the current pack development revision."
+      }
+    }
   ]
 }
